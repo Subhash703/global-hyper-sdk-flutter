@@ -1,0 +1,103 @@
+group 'io.juspay.hyper_sdk_flutter'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.5.31'
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://payments.juspay.io/hyper-sdk/" }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'io.juspay:globalhypersdk.plugin:2.2.6'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://payments.juspay.io/hyper-sdk/" }
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'globalhypersdk.plugin'
+
+android {
+    compileSdk 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    namespace 'io.juspay.hyper_sdk_flutter'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+static def mostRecentVersion(List<String> versions) {
+    return versions.sort(false) { a, b ->
+        [a, b]*.tokenize('-rc')*.join('')*.tokenize('.')*.collect {
+            it as int
+        }.with { u, v ->
+            [u, v].transpose().findResult { x, y -> x <=> y ?: null } ?: u.size() <=> v.size()
+        }
+    }[-1]
+}
+
+static def getHyperSDKVersion(rootProject) {
+    def hyperSdkVersion = '2.2.1'
+    if (!rootProject.hasProperty('hyperSDKVersion')) {
+        return hyperSdkVersion
+    }
+    def rootVersion = rootProject.hyperSDKVersion
+    hyperSdkVersion = rootVersion // mostRecentVersion([rootVersion, hyperSdkVersion]) // TODO Make sure this works
+    if (hyperSdkVersion != rootVersion) {
+        System.out.println("Ignoring the overriden SDK version present in root build.gradle ($rootVersion), as there is a newer version present in the SDK ($hyperSdkVersion).")
+    }
+    return hyperSdkVersion
+}
+
+static def getExcludedMicroSdks(rootProject) {
+    if (!rootProject.hasProperty('excludedMicroSDKs')) {
+        return []
+    }
+    return rootProject.excludedMicroSDKs
+}
+
+static def getClientId(rootProject) {
+    if (!rootProject.hasProperty('clientId')) {
+        throw new GradleException("clientId parameter is required in ext block of root build.gradle")
+    }
+    return rootProject.clientId
+}
+// TODO : Need to change it
+globalHyperSdkPlugin {
+    clientId = getClientId(rootProject)
+    sdkVersion = getHyperSDKVersion(rootProject)
+    excludedMicroSDKs = getExcludedMicroSdks(rootProject)
+}
+
+if(rootProject.hasProperty('hyperAssetVersion')) {
+    globalHyperSdkPlugin.assetVersion = rootProject.hyperAssetVersion
+}
