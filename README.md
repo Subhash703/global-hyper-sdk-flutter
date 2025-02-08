@@ -5,7 +5,7 @@ Flutter plugin for HyperSDK which enables payment orchestration via different dy
 ## Flutter Setup
 
 Add flutter plugin dependency in `pubspec.yaml`.
-Get dependency from [pub.dev](https://pub.dev/packages/hypersdkflutter/install)
+Get dependency from [pub.dev](https://pub.dev/packages/juspayglobalsdkflutter/install)
 
 ## Android Setup
 
@@ -19,7 +19,7 @@ buildscript {
     ext {
         ....
         clientId = "<clientId shared by Juspay team>"
-        hyperSDKVersion = "2.1.32"
+        hyperSDKVersion = "2.2.1"
         excludedMicroSDKs = []
         ....
     }
@@ -54,7 +54,7 @@ Add the following post_install script in the Podfile (`ios/Podfile`)
 
 ```sh
 post_install do |installer|
-  fuse_path = "./Pods/HyperSDK/Fuse.rb"
+  fuse_path = "./Pods/globaljuspaypaymentssdk/Fuse.rb"
   clean_assets = true
   if File.exist?(fuse_path)
     if system("ruby", fuse_path.to_s, clean_assets.to_s)
@@ -63,13 +63,18 @@ post_install do |installer|
 end
 ```
 
-Create file `ios/MerchantConfig.txt` with the following content
+Create file `ios/GlobalJuspayPaymentsConfig.json` with the following content
 
-```txt
-clientId = <clientId> shared by Juspay Team
+```json
+{
+  "clientConfigs": {
+      "<clientId>": {
+      }
+  }
+}
 ```
 
-Optional : (Optional) Add the following variable in [pubspec.yaml](https://github.com/juspay/global-hyper-sdk-flutter/blob/main/example/pubspec.yaml) of your project before running pod install if you want to override the base SDK version present in the plugin (the newer version among both would be considered):
+Optional : (Optional) Add the following variable in [pubspec.yaml](https://github.com/Subhash703/global-sdk-flutter/blob/main/example/pubspec.yaml) of your project before running pod install if you want to override the base SDK version present in the plugin (the newer version among both would be considered):
 
 In your `pubspec.yaml` file:
 
@@ -88,7 +93,7 @@ hyper_sdk_ios_version: "<New version>"
 ### Import HyperSDK
 
 ```dart
-import 'package:hypersdk/hypersdkflutter.dart';
+import 'package:juspayglobalsdkflutter/juspayglobalsdkflutter.dart';
 ```
 
 ### Step-1: Create Juspay Object
@@ -147,7 +152,7 @@ Hyper SDK internally uses an android fragment for opening the bank page and will
 
 For Android, this can be done by wrapping your scaffold widget(or any other parent widget) with `WillPopScope` [Flutter Doumentation](https://api.flutter.dev/flutter/widgets/WillPopScope-class.html)
 
-Call `await juspay.onBackPress();` inside `onWillPop` within `WillPopScope`.
+Call `await hyperSDK.onBackPress();` inside `onWillPop` within `WillPopScope`.
 
 Handling Android Hardware Back-Press can be done using `WillPopScope` as shown below
 
@@ -294,7 +299,7 @@ For EC-Headless Product, [click here](https://developer.juspay.in/v2.0/docs/payl
 
 ## License
 
-hypersdkflutter is distributed under [AGPL-3.0-only](https://pub.dev/packages/hypersdkflutter/license) license.
+juspayglobalsdkflutter is distributed under [AGPL-3.0-only](https://pub.dev/packages/juspayglobalsdkflutter/license) license.
 
 ### Attribution
 

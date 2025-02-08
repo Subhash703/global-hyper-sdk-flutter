@@ -34,6 +34,8 @@ flutter_ios_podfile_setup
 
 target 'Runner' do
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  pod 'GlobalJuspayPaymentsSDK', :podspec => 'https://payments.juspay.io/hyper/bundles/in.juspay.merchants/<client_id>/ios/release/2.2.1.14/sdk_build_config.podspec'
 end
 
 post_install do |installer|
@@ -42,7 +44,7 @@ post_install do |installer|
   end
   # // Add iOS post-install script
   # // block:start:ios-post-install
-  fuse_path = "./Pods/JuspayglobalPaymentServices/Fuse.rb"
+  fuse_path = "./Pods/GlobalJuspayPaymentsSDK/Fuse.rb"
 
   clean_assets = true
   if File.exist?(fuse_path)

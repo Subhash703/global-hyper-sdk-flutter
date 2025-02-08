@@ -1,0 +1,57 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_inappwebview_ios (0.0.1):
+    - Flutter
+    - flutter_inappwebview_ios/Core (= 0.0.1)
+    - OrderedSet (~> 5.0)
+  - flutter_inappwebview_ios/Core (0.0.1):
+    - Flutter
+    - OrderedSet (~> 5.0)
+  - GlobalJuspayPaymentsSDK (2.2.1.14):
+    - HyperSDK (= 2.2.1.14)
+  - HyperSDK (2.2.1.14):
+    - JuspaySafeBrowser (= 0.1.84)
+    - Salvator (= 1.0.6)
+  - juspayglobalsdkflutter (4.0.20):
+    - Flutter
+    - GlobalJuspayPaymentsSDK
+  - JuspaySafeBrowser (0.1.84)
+  - OrderedSet (5.0.0)
+  - Salvator (1.0.6)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
+  - GlobalJuspayPaymentsSDK (from `https://payments.juspay.io/hyper/bundles/in.juspay.merchants/testlatamprod13/ios/release/2.2.1.14/sdk_build_config.podspec`)
+  - juspayglobalsdkflutter (from `.symlinks/plugins/juspayglobalsdkflutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - HyperSDK
+    - JuspaySafeBrowser
+    - OrderedSet
+    - Salvator
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_inappwebview_ios:
+    :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
+  GlobalJuspayPaymentsSDK:
+    :podspec: https://payments.juspay.io/hyper/bundles/in.juspay.merchants/testlatamprod13/ios/release/2.2.1.14/sdk_build_config.podspec
+  juspayglobalsdkflutter:
+    :path: ".symlinks/plugins/juspayglobalsdkflutter/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
+  GlobalJuspayPaymentsSDK: 8a5f85b74e0661ef169b97c7b92d9257e979bce6
+  HyperSDK: a08f4f6548703e02ec186235e98ec51257399fa4
+  juspayglobalsdkflutter: 7872db6253fe2a7d63d8a4af04b1e13998e788b8
+  JuspaySafeBrowser: caa2c1a54405f30210ba9d324cf79224e719134d
+  OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
+  Salvator: 1de69620ac17123ba3491e27a9a8b35bc5b97eaa
+
+PODFILE CHECKSUM: fbd999c48bdf379b5f0f632e581f69628a2ea79b
+
+COCOAPODS: 1.16.2

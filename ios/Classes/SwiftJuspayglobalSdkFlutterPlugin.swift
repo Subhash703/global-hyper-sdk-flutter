@@ -7,13 +7,13 @@
 
 import Flutter
 import UIKit
-import JuspayglobalPaymentServices
+import GlobalJuspayPaymentsSDK
 
 public class SwiftJuspayglobalSdkFlutterPlugin: NSObject, FlutterPlugin {
     private static var CHANNEL_NAME = "juspayglobalPaymentsSDK"
     private let juspayglobalChannel: FlutterMethodChannel
-    private lazy var juspayglobalServices: JuspayglobalPaymentServices = {
-        return JuspayglobalPaymentServices()
+    private lazy var juspayglobalServices: GlobalJuspayPaymentsServices = {
+        return GlobalJuspayPaymentsServices()
     }()
     private let hyperViewController = UIViewController()
 

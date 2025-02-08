@@ -1,6 +1,6 @@
 require "yaml"
 
-hyper_sdk_version = "2.2.1.9"
+hyper_sdk_version = "2.2.1"
 
 begin
   # Read hyper_sdk_version from pubspec.yaml if it exists
@@ -34,7 +34,7 @@ Flutter plugin for tenant SDK.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'GlobalJuspayPaymentsSDK', hyper_sdk_version
+  s.dependency 'GlobalJuspayPaymentsSDK'
   s.platform = :ios, '12.0'
 
   # Flutter.framework does not contain an i386 slice.
